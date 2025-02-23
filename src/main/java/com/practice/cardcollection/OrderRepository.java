@@ -1,4 +1,6 @@
 package com.practice.cardcollection;
 
-public class OrderRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+interface OrderRepository extends JpaRepository<Order, Long> {
 }

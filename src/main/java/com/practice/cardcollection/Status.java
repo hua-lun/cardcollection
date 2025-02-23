@@ -1,4 +1,7 @@
 package com.practice.cardcollection;
 
-public class Status {
+public enum Status {
+    IN_PROGRESS,
+    COMPLETED,
+    CANCELLED,
 }
