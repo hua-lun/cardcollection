@@ -8,17 +8,18 @@ import java.util.Objects;
 
 @Entity
 public class Card {
-    private @Id
-    @GeneratedValue Long id;
+    private @Id @GeneratedValue Long id;
     private String pokemonName;
     private String expansionName;
+    private String seriesName;
     private String cardNumber;
     private int quantity;
 
     Card() {}
 
-    Card(String pokemonName, String expansionName, String cardNumber) {
+    Card(String pokemonName, String seriesName, String expansionName, String cardNumber) {
         this.pokemonName = pokemonName;
+        this.seriesName = seriesName;
         this.expansionName = expansionName;
         this.cardNumber = cardNumber;
         this.quantity = 1;
@@ -32,8 +33,22 @@ public class Card {
         return this.pokemonName;
     }
 
+    public String getSetName() {
+        return this.seriesName + ", " + this.expansionName;
+    }
+
+    public void setSetName(String setName) {
+        String[] parts = setName.split(", ");
+        this.seriesName = parts[0];
+        this.expansionName = parts[1];
+    }
+
     public String getExpansionName() {
         return this.expansionName;
+    }
+
+    public String getSeriesName() {
+        return this.seriesName;
     }
 
     public String getCardNumber() {
@@ -52,6 +67,10 @@ public class Card {
         this.expansionName = expansionName;
     }
 
+    public void setSeriesName(String seriesName) {
+        this.seriesName = seriesName;
+    }
+
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
@@ -68,17 +87,18 @@ public class Card {
         return Objects.equals(this.id, card.id) &&
                 Objects.equals(this.pokemonName, card.pokemonName) &&
                 Objects.equals(this.expansionName, card.expansionName) &&
+                Objects.equals(this.seriesName, card.seriesName) &&
                 Objects.equals(this.cardNumber, card.cardNumber) &&
                 Objects.equals(this.quantity, card.quantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, pokemonName, expansionName, cardNumber, quantity);
+        return Objects.hash(id, pokemonName, expansionName, seriesName, cardNumber, quantity);
     }
 
     @Override
     public String toString() {
-        return "Card{" + "id=" + this.id + ", name=" + this.pokemonName + ", expansionName=" + this.expansionName + ", cardNumber=" + this.cardNumber + ", quantity=" + this.quantity + '}';
+        return "Card{" + "id=" + this.id + ", name=" + this.pokemonName + ", seriesName=" + this.seriesName + ", expansionName=" + this.expansionName + ", cardNumber=" + this.cardNumber + ", quantity=" + this.quantity + '}';
     }
 }
